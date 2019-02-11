@@ -1,24 +1,23 @@
 import collections
-from random import choice
 
-CPA = collections.namedtuple('CPA', ['section','module'])
+Card = collections.namedtuple('Card', ['rank','suit'])
 
 class FrenchDeck:
-    modules = [str(n) for n in range(1,10)]
-    sections = 'FAR AUD BEC REG'.split()
+    ranks = [str(n) for n in range(2,11) + list('JQKA')]
+    suits = 'spades diamonds clubs hearts'.split()
 
 
     def __init__(self):
-        self._cpas = [CPA(section, module) for section in self.sections
-                                            for module in self.modules]
+        self._cards = [Card(rank, suit) for suit in self.suits
+                                        for rank in self.ranks]
 
     def __len__(self):
-        return len(self._cpas)
+        return len(self._cards)
 
     def __getitem__(self,position):
-        return self._cpas[position]
+        return self._cards[position]
 
 
-progress = FrenchDeck()
+beer_card = Card('7','diamonds')
 
-print(choice(progress))
+print(beer_card)
